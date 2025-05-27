@@ -11,32 +11,25 @@ class AppRoutes {
   static const String productDetail = '/productDetail';
   static const String cart = '/cart';
 
-
   static final pages = [
     GetPage(
       name: AppRoutes.splash,
       page: () => const SplashScreen(),
     ),
-
     GetPage(
       name: AppRoutes.home,
       page: () => const HomeScreen(),
-      binding: HomeBinding() ,
+      binding: HomeBinding(),
     ),
-
     GetPage(
       name: AppRoutes.productDetail,
       page: () => const ProductDetailScreen(),
       binding: ProductDetailBinding(),
     ),
-
-
     GetPage(
       name: AppRoutes.cart,
       page: () => const CartScreen(),
       binding: CartBinding(),
     ),
-
-
   ];
 }

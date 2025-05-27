@@ -20,17 +20,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveScreenUtilInit(
-        child: GetMaterialApp(
-          title: AppConstants.appName,
-          debugShowCheckedModeBanner: false,
-          initialBinding: InitialBinding(),
-          getPages: AppRoutes.pages,
-          initialRoute: AppRoutes.splash,
-          defaultTransition: Transition.cupertino,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-            useMaterial3: true,
-          ),
-        ));
+      child: GetMaterialApp(
+        title: AppConstants.appName,
+        debugShowCheckedModeBanner: false,
+        initialBinding: InitialBinding(),
+        getPages: AppRoutes.pages,
+        initialRoute: AppRoutes.splash,
+        defaultTransition: Transition.cupertino,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+          useMaterial3: true,
+        ),
+      ),
+    );
   }
 }

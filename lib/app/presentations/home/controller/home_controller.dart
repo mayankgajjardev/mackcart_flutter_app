@@ -17,20 +17,21 @@ class HomeController extends GetxController {
   var isLoadingMore = false.obs;
   var totalProducts = 0.obs;
 
+
+  /// Set Listeners
   void setupScrollListener() {
     scrollCtrl = ScrollController();
     scrollCtrl.addListener(() async {
       if (scrollCtrl.position.pixels >=
           scrollCtrl.position.maxScrollExtent - 200) {
-        print("assdasdasdasd");
         await loadMoreProducts();
       }
     });
   }
 
+  /// Load More Products
   Future<void> loadMoreProducts() async {
-    print("asddasdsdsda :: ${isLoadingMore.value} ===> ${skip} :: ${totalProducts.value} ------ ${(isLoadingMore.value || skip >= totalProducts.value)}");
-    if (isLoadingMore.value || skip >= totalProducts.value) return;
+    if (isLoadingMore.value || skip >= totalProducts.value || searchCtrl.text.isNotEmpty) return;
     isLoadingMore(true);
     final res = await ApiService.request(
         path: AppConstants.products,
@@ -44,6 +45,7 @@ class HomeController extends GetxController {
       final existing =
           (products.value as ApiSuccess<ProductsModel>).data.products ?? [];
       final newProducts = res.data.products ?? <Product>[];
+      filterProducts.value = [...filterProducts, ...newProducts];
       products.value = ApiSuccess(res.data.copyWith(
           products: [...existing, ...newProducts],
           skip: skip.value,
@@ -60,9 +62,8 @@ class HomeController extends GetxController {
       products.value = ApiSuccess(ProductsModel(products: filterProducts));
       return;
     }
-
     products.value = ApiSuccess(ProductsModel(
-        products: (filterProducts.value.where((p) => (p.title ?? '')
+        products: (filterProducts.where((p) => (p.title ?? '')
                     .toLowerCase()
                     .contains(query.trim().toLowerCase())) ??
                 [])
@@ -122,7 +123,8 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    searchCtrl.dispose();
     super.onClose();
+    searchCtrl.dispose();
+    scrollCtrl.dispose();
   }
 }

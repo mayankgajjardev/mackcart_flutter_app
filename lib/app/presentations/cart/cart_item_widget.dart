@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mack_cart_app/app/constants/app_assets.dart';
 import 'package:mack_cart_app/app/constants/app_colors.dart';
 import 'package:mack_cart_app/app/constants/app_extension.dart';
 import 'package:mack_cart_app/app/presentations/home/model/get_products_model.dart';
@@ -12,7 +11,12 @@ class CartItemWidget extends StatelessWidget {
   final VoidCallback onIncrease;
   final VoidCallback onDecrease;
 
-  const CartItemWidget({super.key, this.product, required this.onRemove, required this.onIncrease, required this.onDecrease});
+  const CartItemWidget(
+      {super.key,
+      this.product,
+      required this.onRemove,
+      required this.onIncrease,
+      required this.onDecrease});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +82,7 @@ class CartItemWidget extends StatelessWidget {
                     minimumSize: Size(16.0.w, 16.0.h),
                     backgroundColor: AppColors.primary,
                   ),
-                  onPressed:onIncrease,
+                  onPressed: onIncrease,
                 ),
               ],
             ),

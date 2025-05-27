@@ -109,6 +109,7 @@ class HomeScreen extends GetWidget<HomeController> {
                       : RefreshIndicator(
                           color: AppColors.primary,
                           onRefresh: () async {
+                            controller.searchCtrl.clear();
                             await controller.getAllProducts();
                           },
                           child: Column(
